@@ -26,4 +26,21 @@ public class ProjectController {
                 () -> new RuntimeException("Project not found by idProject")
         );
     }
+
+    @PatchMapping("edit/idProject/{id}")
+    public Project editProjectById(@PathVariable Integer id, @RequestBody Project project){
+        Project originalProject = projectRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Project not found on edit")
+        );
+        return convertProject(originalProject, project);
+    }
+
+    private Project convertProject(Project originalProject, Project project) {
+        Project newProject = new Project();
+        newProject.setId(originalProject.getId());
+
+        newProject.setTitle(project.getTitle());
+        newProject.setDescription(project.getDescription());
+        return newProject;
+    }
 }

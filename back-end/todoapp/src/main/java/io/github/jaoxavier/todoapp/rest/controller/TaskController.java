@@ -1,11 +1,17 @@
 package io.github.jaoxavier.todoapp.rest.controller;
 
 
+import io.github.jaoxavier.todoapp.domain.dto.TaskDTO;
+import io.github.jaoxavier.todoapp.domain.entity.Project;
 import io.github.jaoxavier.todoapp.domain.entity.Task;
+import io.github.jaoxavier.todoapp.domain.repository.ProjectRepository;
 import io.github.jaoxavier.todoapp.domain.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RestController
 @RequiredArgsConstructor
@@ -13,11 +19,12 @@ import org.springframework.web.bind.annotation.*;
 public class TaskController {
 
     private final TaskRepository taskRepository;
+    private final ProjectRepository projectRepository;
 
     @PostMapping("new")
     @ResponseStatus(HttpStatus.CREATED)
-    public Task createNewTask(@RequestBody Task task){
-        return taskRepository.save(task);
+    public Task createNewTask(@RequestBody TaskDTO dto){
+        return createTask(dto);
     }
 
     @GetMapping("idTask/{id}")
@@ -25,6 +32,38 @@ public class TaskController {
         return taskRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Task not found by idTask")
         );
+    }
+
+    @PatchMapping("edit/idTask/{id}")
+    public Task editTaskById(@PathVariable Integer id, @RequestBody Task task){
+        Task originalTask = taskRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Task not found on edit")
+        );
+        return convertTask(originalTask, task);
+    }
+
+    private Task convertTask(Task originalTask, Task task) {
+        Task newTask = new Task();
+        newTask.setId(originalTask.getId());
+        newTask.setProject(originalTask.getProject());
+
+        newTask.setTitle(task.getTitle());
+        newTask.setDescription(task.getDescription());
+        newTask.setDueDate(task.getDueDate());
+        newTask.setFinished(task.getFinished());
+
+        return newTask;
+    }
+
+    private Task createTask(TaskDTO dto){
+        Task task = new Task();
+        task.setTitle(dto.getTitle());
+        task.setDescription(dto.getDescription());
+        task.setDueDate(LocalDate.parse(dto.getDueDate()));
+        task.setProject(projectRepository.findById(dto.getIdProject()).orElseThrow(
+                () -> new RuntimeException("Project not found on task")
+        ));
+        return taskRepository.save(task);
     }
 
 }
