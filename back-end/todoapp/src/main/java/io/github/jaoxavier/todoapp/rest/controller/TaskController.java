@@ -7,6 +7,7 @@ import io.github.jaoxavier.todoapp.domain.entity.Task;
 import io.github.jaoxavier.todoapp.domain.repository.ProjectRepository;
 import io.github.jaoxavier.todoapp.domain.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,7 @@ public class TaskController {
     }
 
     @PatchMapping("edit/idTask/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Task editTaskById(@PathVariable Integer id, @RequestBody Task task){
         Task originalTask = taskRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Task not found on edit")
@@ -42,15 +44,29 @@ public class TaskController {
         return convertTask(originalTask, task);
     }
 
+    @DeleteMapping("delete/idTask/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteTask(@PathVariable Integer id){
+        taskRepository.deleteById(id);
+    }
+
     private Task convertTask(Task originalTask, Task task) {
         Task newTask = new Task();
-        newTask.setId(originalTask.getId());
-        newTask.setProject(originalTask.getProject());
 
-        newTask.setTitle(task.getTitle());
-        newTask.setDescription(task.getDescription());
-        newTask.setDueDate(task.getDueDate());
-        newTask.setFinished(task.getFinished());
+        BeanUtils.copyProperties(originalTask, newTask);
+
+        if(task.getTitle() != null){
+            newTask.setTitle(task.getTitle());
+        }
+        if(task.getDescription() != null){
+            newTask.setDescription(task.getDescription());
+        }
+        if(task.getDueDate() != null){
+            newTask.setDueDate(task.getDueDate());
+        }
+        if(task.getFinished() != null){
+            newTask.setFinished(task.getFinished());
+        }
 
         return newTask;
     }

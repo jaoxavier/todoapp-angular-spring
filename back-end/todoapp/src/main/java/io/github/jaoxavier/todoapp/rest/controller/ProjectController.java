@@ -28,6 +28,7 @@ public class ProjectController {
     }
 
     @PatchMapping("edit/idProject/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Project editProjectById(@PathVariable Integer id, @RequestBody Project project){
         Project originalProject = projectRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Project not found on edit")
@@ -35,12 +36,28 @@ public class ProjectController {
         return convertProject(originalProject, project);
     }
 
+    @DeleteMapping("delete/idProject/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteProject(@PathVariable Integer id){
+        projectRepository.deleteById(id);
+    }
+
     private Project convertProject(Project originalProject, Project project) {
         Project newProject = new Project();
         newProject.setId(originalProject.getId());
 
-        newProject.setTitle(project.getTitle());
-        newProject.setDescription(project.getDescription());
-        return newProject;
+        if(project.getTitle() == null){
+            newProject.setTitle(originalProject.getTitle());
+        }else{
+            newProject.setTitle(project.getTitle());
+        }
+
+        if(project.getDescription() == null){
+            newProject.setDescription(originalProject.getDescription());
+        }else {
+            newProject.setDescription(project.getDescription());
+        }
+
+        return projectRepository.save(newProject);
     }
 }
