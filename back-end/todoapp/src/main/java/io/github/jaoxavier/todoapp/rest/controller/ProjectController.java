@@ -2,6 +2,7 @@ package io.github.jaoxavier.todoapp.rest.controller;
 
 import io.github.jaoxavier.todoapp.domain.entity.Project;
 import io.github.jaoxavier.todoapp.domain.repository.ProjectRepository;
+import io.github.jaoxavier.todoapp.domain.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequestMapping("/api/projects/")
 public class ProjectController {
     private final ProjectRepository projectRepository;
+    private final TaskRepository taskRepository;
 
     @PostMapping("new")
     @ResponseStatus(HttpStatus.CREATED)
@@ -39,7 +41,13 @@ public class ProjectController {
     @DeleteMapping("delete/idProject/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteProject(@PathVariable Integer id){
-        projectRepository.deleteById(id);
+        Project project = projectRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Project not found")
+        );
+        taskRepository.findByProject(project).forEach(task -> {
+            taskRepository.deleteById(task.getId());
+        });
+        projectRepository.deleteById(id);;
     }
 
     private Project convertProject(Project originalProject, Project project) {
