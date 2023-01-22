@@ -17,6 +17,8 @@ import { TaskComponent } from './main/task/task.component';
 import { HeaderComponent } from './static/header/header.component';
 import { NewProjectComponent } from './dialog/new-project/new-project.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EditProjectComponent } from './dialog/edit-project/edit-project.component';
+import { NewTaskComponent } from './dialog/new-task/new-task.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProjectComponent,
     TaskComponent,
     HeaderComponent,
-    NewProjectComponent
+    NewProjectComponent,
+    EditProjectComponent,
+    NewTaskComponent
   ],
   imports: [
     BrowserModule,

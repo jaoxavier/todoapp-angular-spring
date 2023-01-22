@@ -1,10 +1,15 @@
 export class Project{
-    private _title: string;
-    private _description: string;
+    private _id!: number;
+    private _title: string | null;
+    private _description: string | null;
 
-    constructor(title: string, description: string){
+    constructor(title: string | null, description: string | null){
         this._title = title;
         this._description = description;
+    }
+
+    get id(){
+        return this._id;
     }
 
     set title(value: string){

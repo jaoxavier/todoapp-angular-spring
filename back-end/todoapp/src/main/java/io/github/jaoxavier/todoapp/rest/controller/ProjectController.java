@@ -4,8 +4,11 @@ import io.github.jaoxavier.todoapp.domain.entity.Project;
 import io.github.jaoxavier.todoapp.domain.repository.ProjectRepository;
 import io.github.jaoxavier.todoapp.domain.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +29,11 @@ public class ProjectController {
         return projectRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Project not found by idProject")
         );
+    }
+
+    @GetMapping
+    public List<Project> getAllProjects(){
+        return projectRepository.findAll();
     }
 
     @PatchMapping("edit/idProject/{id}")
@@ -51,17 +59,12 @@ public class ProjectController {
 
     private Project convertProject(Project originalProject, Project project) {
         Project newProject = new Project();
-        newProject.setId(originalProject.getId());
+        BeanUtils.copyProperties(originalProject, newProject);
 
-        if(project.getTitle() == null){
-            newProject.setTitle(originalProject.getTitle());
-        }else{
+        if(!project.getTitle().equals("null")){
             newProject.setTitle(project.getTitle());
         }
-
-        if(project.getDescription() == null){
-            newProject.setDescription(originalProject.getDescription());
-        }else {
+        if(!project.getDescription().equals("null")){
             newProject.setDescription(project.getDescription());
         }
 

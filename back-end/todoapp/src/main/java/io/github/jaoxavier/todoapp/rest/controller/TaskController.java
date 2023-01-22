@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,6 +35,11 @@ public class TaskController {
         return taskRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Task not found by idTask")
         );
+    }
+
+    @GetMapping
+    public List<Task> getAllTasks(){
+        return taskRepository.findAll();
     }
 
     @PatchMapping("edit/idTask/{id}")

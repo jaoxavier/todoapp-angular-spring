@@ -1,0 +1,20 @@
+<div class="new-task-container">
+    <form (ngSubmit)="onSubmit()">
+        <h1>Create new task</h1>
+        <div class="task-title">
+            <mat-label>Task's Title</mat-label>
+            <input matInput type="text" name="title" id="task-title" required [(ngModel)]="taskForm.title">
+        </div>
+        <div class="task-description">
+            <mat-label>Task's Description</mat-label>
+            <input matInput type="text" name="description" id="task-description" [(ngModel)]="taskForm.description">
+        </div>
+        <div class="task-dueDate">
+            <mat-label>Task's Due Date</mat-label>
+            <input matInput type="date" name="description" id="task-description" required [(ngModel)]="taskForm.dueDate">
+        </div>
+        <div class="submit">
+            <button mat-raised-button type="submit">Create</button>
+        </div>
+    </form>
+</div>

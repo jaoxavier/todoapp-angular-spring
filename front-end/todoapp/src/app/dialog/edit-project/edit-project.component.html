@@ -1,0 +1,16 @@
+<div class="new-project-container">
+    <form (ngSubmit)="onSubmit()">
+        <h1>Edit project</h1>
+        <div class="project-title">
+            <mat-label>Project's Title</mat-label>
+            <input matInput type="text" name="title" id="project-title" required [(ngModel)]="projectForm.title">
+        </div>
+        <div class="project-description">
+            <mat-label>Project's Description</mat-label>
+            <input matInput type="text" name="description" id="project-description" [(ngModel)]="projectForm.description">
+        </div>
+        <div class="submit">
+            <button mat-raised-button type="submit">Create</button>
+        </div>
+    </form>
+</div>
