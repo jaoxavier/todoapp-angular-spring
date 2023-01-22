@@ -3,6 +3,10 @@ table{
     text-align: center;
 }
 
-td{
-    border: 1px solid black;
+.task-description{
+    width: 80%;
+}
+
+mat-icon:hover{
+    cursor: pointer;
 }

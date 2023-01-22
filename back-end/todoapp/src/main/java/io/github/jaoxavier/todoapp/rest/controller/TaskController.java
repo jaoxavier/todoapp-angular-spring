@@ -62,20 +62,20 @@ public class TaskController {
 
         BeanUtils.copyProperties(originalTask, newTask);
 
-        if(task.getTitle() != null){
+        if(!task.getTitle().equals("null")){
             newTask.setTitle(task.getTitle());
         }
-        if(task.getDescription() != null){
+        if(!task.getDescription().equals("null")){
             newTask.setDescription(task.getDescription());
         }
-        if(task.getDueDate() != null){
+        if(!task.getDueDate().equals("null")){
             newTask.setDueDate(task.getDueDate());
         }
-        if(task.getFinished() != null){
-            newTask.setFinished(task.getFinished());
-        }
 
-        return newTask;
+        newTask.setFinished(task.getFinished());
+        System.out.println(task);
+        System.out.println(newTask);
+        return taskRepository.save(newTask);
     }
 
     private Task createTask(TaskDTO dto){

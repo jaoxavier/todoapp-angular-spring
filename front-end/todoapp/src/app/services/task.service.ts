@@ -19,4 +19,12 @@ export class TaskService {
   getAllTasks(){
     return this.http.get<any>(`${API}/tasks/`);
   }
+
+  patchTask(task: Task, idTask: number){
+    return this.http.patch<any>(`${API}/tasks/edit/idTask/${idTask}`, task);
+  }
+
+  deleteTask(idTask: number){
+    return this.http.delete<any>(`${API}/tasks/delete/idTask/${idTask}`);
+  }
 }

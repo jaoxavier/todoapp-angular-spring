@@ -1,20 +1,24 @@
 export class Task{
     private _id!: number;
-    private _title: string;    
-    private _description: string;
-    private _dueDate: string;
+    private _title: string | null;    
+    private _description: string | null;
+    private _dueDate: string | null;
     private _finished: boolean;
 
     constructor(
-        title: string,
-        description: string,
-        dueDate: string
+        title: string | null,
+        description: string | null,
+        dueDate: string | null
     )
     {
         this._title = title;
         this._description = description;
         this._dueDate = dueDate;
         this._finished = false;
+    }
+
+    get id(){
+        return this._id
     }
 
     set title(value: string){
@@ -31,6 +35,10 @@ export class Task{
 
     set finished(value: boolean){
         this._finished = value
+    }
+
+    toString(){
+        return `{"title" : "${this._title}","description" : "${this._description}","dueDate" : "${this._dueDate}"}`
     }
 
 }

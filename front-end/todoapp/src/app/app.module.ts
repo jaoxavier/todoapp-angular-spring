@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +20,7 @@ import { NewProjectComponent } from './dialog/new-project/new-project.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditProjectComponent } from './dialog/edit-project/edit-project.component';
 import { NewTaskComponent } from './dialog/new-task/new-task.component';
+import { EditTaskComponent } from './dialog/edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { NewTaskComponent } from './dialog/new-task/new-task.component';
     HeaderComponent,
     NewProjectComponent,
     EditProjectComponent,
-    NewTaskComponent
+    NewTaskComponent,
+    EditTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,8 @@ import { NewTaskComponent } from './dialog/new-task/new-task.component';
     MatFormFieldModule,
     FormsModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
