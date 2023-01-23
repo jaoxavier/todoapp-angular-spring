@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component} from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Project } from 'src/app/model/Project';
 import { ProjectService } from 'src/app/services/project.service';
 
@@ -12,17 +12,20 @@ export class NewProjectComponent{
 
   constructor(
     private projectService: ProjectService
-  ){}
-  
-  projectForm = {
-    title: '',
-    description: ''
+  ){
+    this.title.setErrors({
+      'required':'Title is required',
+      'minLength':'Title must be 3 caracters long'
+    });
   }
 
+  title = new FormControl('', [Validators.required, Validators.minLength(3)])
+  description = new FormControl('');
+  
   onSubmit(){
     let model = new Project(
-      this.projectForm.title,
-      this.projectForm.description
+      this.title.value,
+      this.description.value
     );
 
     this.projectService.postNewProject(

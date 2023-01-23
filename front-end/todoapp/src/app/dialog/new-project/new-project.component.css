@@ -1,4 +1,19 @@
 .new-project-container{
     display: flex;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
+    width: 480px;
+    height: 400px;
 }
+
+.title-form{
+    margin: 12px;
+}
+
+.form{
+    width: 80%;
+}
+
+
+

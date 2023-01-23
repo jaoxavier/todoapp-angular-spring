@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -45,7 +47,9 @@ import { EditTaskComponent } from './dialog/edit-task/edit-task.component';
     FormsModule,
     MatButtonModule,
     HttpClientModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
