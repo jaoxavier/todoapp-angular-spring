@@ -20,10 +20,10 @@ export class Project{
         this._description = value;
     }
 
-    toString(){
-        return `{
-            "title": "${this._title}",
-            "description": "${this._description}"
-        }`
+    get projectData(){
+        return Object.assign({}, this, {
+            title: this._title,
+            description: this._description
+        });
     }
 }

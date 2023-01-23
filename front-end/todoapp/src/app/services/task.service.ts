@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API } from '../model/Api';
 import { Task } from '../model/Task';
+import { TaskDTO } from '../model/TaskDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class TaskService {
     private http: HttpClient
   ) { }
 
-  postNewTask(task: Task){
+  postNewTask(task: Task | TaskDTO){
     return this.http.post<any>(`${API}/tasks/new`, task);
   }
 

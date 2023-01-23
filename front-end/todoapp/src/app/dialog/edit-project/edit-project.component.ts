@@ -35,7 +35,7 @@ export class EditProjectComponent {
     );
 
     this.projectService.patchProject(
-      JSON.parse(model.toString()),
+      model.projectData,
       this.id
     ).subscribe(
       data => {

@@ -35,12 +35,11 @@ export class NewTaskComponent {
       this.taskForm.dueDate
     );
 
-    this.taskService.postNewTask(
-      JSON.parse(model.toString())
-    ).subscribe(data => {
-      console.log(data)
-      window.location.reload()
-    });
+    this.taskService.postNewTask(model).subscribe(
+      data => {
+        window.location.reload()
+      }
+    );
   }
 
 }

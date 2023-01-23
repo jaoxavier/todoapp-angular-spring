@@ -12,13 +12,4 @@ export class TaskDTO{
         this.description = description;
         this.dueDate = dueDate;
     }
-
-    toString(){
-        return `{
-            "idProject":${this.idProject},
-            "title":"${this.title}",
-            "description":"${this.description}",
-            "dueDate":"${this.dueDate}"
-        }`
-    }
 }

@@ -37,8 +37,12 @@ export class Task{
         this._finished = value
     }
 
-    toString(){
-        return `{"title" : "${this._title}","description" : "${this._description}","dueDate" : "${this._dueDate}"}`
+    public get taskData(){
+        return Object.assign({}, this, {
+            title: this._title,
+            description: this._description,
+            dueDate: this._dueDate
+        })
     }
 
 }

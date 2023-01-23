@@ -26,7 +26,7 @@ export class NewProjectComponent{
     );
 
     this.projectService.postNewProject(
-      JSON.parse(model.toString())
+      model.projectData
     ).subscribe(
       data => {
         window.location.reload()

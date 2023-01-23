@@ -61,10 +61,10 @@ public class ProjectController {
         Project newProject = new Project();
         BeanUtils.copyProperties(originalProject, newProject);
 
-        if(!project.getTitle().equals("null")){
+        if(project.getTitle() != null){
             newProject.setTitle(project.getTitle());
         }
-        if(!project.getDescription().equals("null")){
+        if(project.getDescription() != null){
             newProject.setDescription(project.getDescription());
         }
 

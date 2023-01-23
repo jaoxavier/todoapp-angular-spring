@@ -40,7 +40,7 @@ export class EditTaskComponent {
     )
 
     this.taskService.patchTask(
-      JSON.parse(model.toString()),
+      model.taskData,
       this.id
     ).subscribe(data =>{
       window.location.reload()
