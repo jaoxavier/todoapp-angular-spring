@@ -1,11 +1,11 @@
 export class TaskDTO{
     private idProject: number;
-    private title: string;
-    private description: string;
-    private dueDate: string;
+    private title: string | null;
+    private description: string | null;
+    private dueDate: string | null;
 
     constructor(
-        idProject: number, title: string, description: string, dueDate: string
+        idProject: number, title: string | null, description: string | null, dueDate: string | null
     ){
         this.idProject = idProject;
         this.title = title;

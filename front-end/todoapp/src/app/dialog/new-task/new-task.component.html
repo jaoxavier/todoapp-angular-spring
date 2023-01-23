@@ -1,20 +1,34 @@
 <div class="new-task-container">
-    <form (ngSubmit)="onSubmit()">
-        <h1>Create new task</h1>
-        <div class="task-title">
-            <mat-label>Task's Title</mat-label>
-            <input matInput type="text" name="title" id="task-title" required [(ngModel)]="taskForm.title">
+    <h1 class="title-form">Create new task</h1>
+    <mat-form-field class="form">
+        <div class="title">
+            <mat-label>Title:</mat-label>
+            <input matInput required [formControl]="title">
+            <mat-error *ngIf="title.errors?.['required'] && title.touched">Title is required</mat-error>
+            <mat-error *ngIf="title.invalid && title.touched">Title must have minimum 3 letters</mat-error>
+        </div>   
+    </mat-form-field>
+    
+    <mat-form-field class="form">
+        <div class="description">
+            <mat-label>Description:</mat-label>
+            <input matInput [formControl]="description">
         </div>
-        <div class="task-description">
-            <mat-label>Task's Description</mat-label>
-            <input matInput type="text" name="description" id="task-description" [(ngModel)]="taskForm.description">
+    </mat-form-field>
+    
+    <mat-form-field class="form">
+        <mat-label>Due Date</mat-label>
+        <div class="dueDate">
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="dueDate">
+            <mat-error *ngIf="dueDate.invalid && dueDate.touched">Due Date is required</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
         </div>
-        <div class="task-dueDate">
-            <mat-label>Task's Due Date</mat-label>
-            <input matInput type="date" name="description" id="task-description" required [(ngModel)]="taskForm.dueDate">
-        </div>
-        <div class="submit">
-            <button mat-raised-button type="submit">Create</button>
-        </div>
-    </form>
+    </mat-form-field>
+
+    <div class="submit">
+        <button type="submit" mat-raised-button [disabled]="title.invalid && dueDate.invalid" (click)="onSubmit()">
+            Create
+        </button>
+    </div>
 </div>
