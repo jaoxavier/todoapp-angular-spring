@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Task } from 'src/app/model/Task';
 import { TaskService } from 'src/app/services/task.service';
@@ -10,11 +11,9 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class EditTaskComponent {
 
-  taskForm = {
-    title: '' as string | null,
-    description: '' as string | null,
-    dueDate: '' as string | null
-  }
+  title = new FormControl('', [Validators.minLength(3)]);
+  description = new FormControl('');
+  dueDateForm = new FormControl('')
 
   id: number;
   dueDate: string;
@@ -29,14 +28,14 @@ export class EditTaskComponent {
 
   onSubmit(){
 
-    this.taskForm.title = this.taskForm.title === '' ? null : this.taskForm.title
-    this.taskForm.description = this.taskForm.description === '' ? null : this.taskForm.description
-    this.taskForm.dueDate = this.taskForm.dueDate === '' ? this.taskForm.dueDate = this.dueDate : this.taskForm.dueDate
+    this.title = this.title.value === '' ? new FormControl(null) : this.title
+    this.description = this.description.value === '' ? new FormControl(null) : this.description
+    this.dueDateForm = this.dueDateForm.value === '' ? new FormControl(this.dueDate) : this.dueDateForm
 
     let model = new Task(
-      this.taskForm.title,
-      this.taskForm.description,
-      this.taskForm.dueDate
+      this.title.value,
+      this.description.value,
+      this.dueDateForm.value
     )
 
     this.taskService.patchTask(

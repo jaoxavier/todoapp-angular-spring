@@ -1,0 +1,16 @@
+.edit-task-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 480px;
+    height: 500px;
+}
+
+.form{
+    width: 80%;
+}
+
+.dueDate{
+    display: flex;
+}

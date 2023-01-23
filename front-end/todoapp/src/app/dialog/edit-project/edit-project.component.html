@@ -1,16 +1,23 @@
-<div class="new-project-container">
-    <form (ngSubmit)="onSubmit()">
-        <h1>Edit project</h1>
-        <div class="project-title">
-            <mat-label>Project's Title</mat-label>
-            <input matInput type="text" name="title" id="project-title" required [(ngModel)]="projectForm.title">
+<div class="edit-project-container">
+    <h1 class="title-form">Edit project</h1>
+    <mat-form-field class="form">
+        <div class="title">
+            <mat-label>Title:</mat-label>
+            <input matInput [formControl]="title">
+            <mat-error *ngIf="title.invalid && title.touched">Title must have minimum 3 letters</mat-error>
+        </div>   
+    </mat-form-field>
+
+    <mat-form-field class="form">
+        <div class="description">
+            <mat-label>Description:</mat-label>
+            <input matInput [formControl]="description">
         </div>
-        <div class="project-description">
-            <mat-label>Project's Description</mat-label>
-            <input matInput type="text" name="description" id="project-description" [(ngModel)]="projectForm.description">
-        </div>
-        <div class="submit">
-            <button mat-raised-button type="submit">Create</button>
-        </div>
-    </form>
+    </mat-form-field>
+
+    <div class="submit">
+        <button type="submit" mat-raised-button [disabled]="title.invalid" (click)="onSubmit()">
+            Create
+        </button>
+    </div>
 </div>

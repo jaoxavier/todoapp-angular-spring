@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Project } from 'src/app/model/Project';
 import { ProjectService } from 'src/app/services/project.service';
@@ -10,6 +11,9 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class EditProjectComponent {
 
+  title = new FormControl('', [Validators.minLength(3)]);
+  description = new FormControl('');
+
   id: number;
 
   constructor(
@@ -18,21 +22,18 @@ export class EditProjectComponent {
   ){
     this.id = data.id
   }
-  
-  projectForm = {
-    title: '' as string | null,
-    description: '' as string | null
-  }
 
   onSubmit(){
 
-    this.projectForm.title = this.projectForm.title === '' ? null : this.projectForm.title
-    this.projectForm.description = this.projectForm.description === '' ? null : this.projectForm.description
+    this.title = this.title.value === '' ? new FormControl(null) : this.title
+    this.description= this.description.value === '' ? new FormControl(null) : this.description
 
     let model = new Project(
-      this.projectForm.title,
-      this.projectForm.description
+      this.title.value,
+      this.description.value
     );
+
+    console.log(model)
 
     this.projectService.patchProject(
       model.projectData,

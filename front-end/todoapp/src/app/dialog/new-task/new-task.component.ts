@@ -15,7 +15,7 @@ export class NewTaskComponent {
 
   title = new FormControl('', [Validators.required, Validators.minLength(3)]);
   description = new FormControl('');
-  dueDate = new FormControl(new Date(), [Validators.required]);
+  dueDate = new FormControl('', [Validators.required]);
 
   idProject: number;
 
@@ -31,9 +31,7 @@ export class NewTaskComponent {
   }
 
   onSubmit(){
-
-//    let date = this.dueDate!.value!.toISOString()
-    
+        
     let date = moment(this.dueDate.value).format('yyyy-MM-DD');
     console.log(date)
 
