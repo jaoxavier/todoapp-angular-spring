@@ -24,16 +24,15 @@ export class NewTaskComponent {
     private taskService: TaskService
   )
   {
-    this.idProject = data.id
+    this.idProject = data.id;
+    
     this.title.setErrors({
       'required':'',
     });
   }
 
   onSubmit(){
-        
     let date = moment(this.dueDate.value).format('yyyy-MM-DD');
-    console.log(date)
 
     let model = new TaskDTO(
       this.idProject,

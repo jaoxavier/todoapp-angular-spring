@@ -6,10 +6,20 @@
     display: flex;
     justify-content: space-between;
 }
+
+.project-description{
+    max-width: 25rem;
+    word-wrap: break-word;
+}
+
 .icon-project{
     margin-left: 20px;
 }
 
 .icon-project:hover{
     cursor: pointer;
+}
+
+.task-container{
+    margin-top: 20px;
 }

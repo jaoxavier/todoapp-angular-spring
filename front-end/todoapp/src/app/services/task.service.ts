@@ -17,8 +17,8 @@ export class TaskService {
     return this.http.post<any>(`${API}/tasks/new`, task);
   }
 
-  getAllTasks(){
-    return this.http.get<any>(`${API}/tasks/`);
+  getAllTasks(idProject: number){
+    return this.http.get<any>(`${API}/tasks/idProject/${idProject}`);
   }
 
   patchTask(task: Task, idTask: number){

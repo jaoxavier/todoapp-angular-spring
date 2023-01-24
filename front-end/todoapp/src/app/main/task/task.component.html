@@ -5,10 +5,17 @@
     
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{task.title}}
+            <p class="title">
+              {{task.title}}
+            </p>
           </mat-panel-title>
-          <mat-panel-description>
-            {{task.dueDate | date: 'dd/MM/yyyy'}}
+          <mat-panel-description class="description">
+            <div class="expired" *ngIf="taskExpired(task.id)">
+              Expired at: {{task.dueDate | date: 'dd/MM/yyyy'}}
+            </div>
+            <div class="expires" *ngIf="!taskExpired(task.id)">
+              Expires at: {{task.dueDate | date: 'dd/MM/yyyy'}}
+            </div>
           </mat-panel-description>
         </mat-expansion-panel-header>
 

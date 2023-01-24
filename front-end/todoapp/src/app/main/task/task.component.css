@@ -3,8 +3,20 @@ table{
     text-align: center;
 }
 
+.title{
+    max-width: 19rem;
+    word-wrap: break-word;
+}
+
 .task-description{
-    width: 80%;
+    display: block;
+    max-width: 25rem;
+    word-wrap: break-word;
+}
+
+.description{
+    display: flex;
+    justify-content: flex-end;
 }
 
 mat-icon:hover{

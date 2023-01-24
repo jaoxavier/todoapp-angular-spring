@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditTaskComponent } from 'src/app/dialog/edit-task/edit-task.component';
 import { Task } from 'src/app/model/Task';
@@ -10,6 +10,7 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit{
+  @Input() idProject!: number;
 
   panelOpenState = false;
 
@@ -21,7 +22,7 @@ export class TaskComponent implements OnInit{
   tasks: Task[] = [];
 
   ngOnInit(){
-    this.taskService.getAllTasks().subscribe(data => {
+    this.taskService.getAllTasks(this.idProject).subscribe(data => {
       this.tasks = data
     });
   }
@@ -54,6 +55,14 @@ export class TaskComponent implements OnInit{
     this.taskService.deleteTask(id).subscribe(
       data => window.location.reload()
     )
+  }
+
+  taskExpired(id: number){
+    let task = this.tasks.find(task => task.id == id);
+    if(new Date() > new Date(task!.dueDate)){
+      return true;
+    }
+    return false;
   }
 
 }

@@ -22,6 +22,7 @@ export class Project{
 
     get projectData(){
         return Object.assign({}, this, {
+            id: this._id,
             title: this._title,
             description: this._description
         });
