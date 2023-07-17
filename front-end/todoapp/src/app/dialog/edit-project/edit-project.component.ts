@@ -24,19 +24,18 @@ export class EditProjectComponent {
   }
 
   onSubmit(){
-
     this.title = this.title.value === '' ? new FormControl(null) : this.title
     this.description= this.description.value === '' ? new FormControl(null) : this.description
 
-    let model = new Project(
-      this.title.value,
-      this.description.value
-    );
+    let model: Project = {
+      title: this.title.value,
+      description: this.description.value
+    };
 
     console.log(model)
 
     this.projectService.patchProject(
-      model.projectData,
+      model,
       this.id
     ).subscribe(
       data => {

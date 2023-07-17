@@ -16,7 +16,4 @@ export class HeaderComponent {
   openDialog(){
     this.dialog.open(NewProjectComponent);
   }
-  
-  
-
 }

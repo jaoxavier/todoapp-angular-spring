@@ -59,7 +59,7 @@ export class TaskComponent implements OnInit{
 
   taskExpired(id: number){
     let task = this.tasks.find(task => task.id == id);
-    if(new Date() > new Date(task!.dueDate)){
+    if(new Date() > new Date(task!.dueDate!)){
       return true;
     }
     return false;

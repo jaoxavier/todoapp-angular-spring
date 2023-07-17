@@ -34,12 +34,12 @@ export class NewTaskComponent {
   onSubmit(){
     let date = moment(this.dueDate.value).format('yyyy-MM-DD');
 
-    let model = new TaskDTO(
-      this.idProject,
-      this.title.value,
-      this.description.value,
-      date
-    );
+    let model: TaskDTO = {
+      idProject: this.idProject,
+      title: this.title.value,
+      description: this.description.value,
+      dueDate:date
+    };
 
     this.taskService.postNewTask(model).subscribe(
       data => {

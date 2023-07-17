@@ -32,14 +32,14 @@ export class EditTaskComponent {
     this.description = this.description.value === '' ? new FormControl(null) : this.description
     this.dueDateForm = this.dueDateForm.value === '' ? new FormControl(this.dueDate) : this.dueDateForm
 
-    let model = new Task(
-      this.title.value,
-      this.description.value,
-      this.dueDateForm.value
-    )
+    let model: Task = {
+      title: this.title.value,
+      description: this.description.value,
+      dueDate: this.dueDateForm.value
+    };
 
     this.taskService.patchTask(
-      model.taskData,
+      model,
       this.id
     ).subscribe(data =>{
       window.location.reload()

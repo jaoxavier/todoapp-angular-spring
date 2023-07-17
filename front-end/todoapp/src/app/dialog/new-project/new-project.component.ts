@@ -23,14 +23,16 @@ export class NewProjectComponent{
   description = new FormControl('');
   
   onSubmit(){
-    let model = new Project(
-      this.title.value,
-      this.description.value
-    );
+    if(this.title.value == null){
+      throw new Error("Title is required");
+    }
 
-    this.projectService.postNewProject(
-      model.projectData
-    ).subscribe(
+    let model: Project = { 
+      title: this.title.value,
+      description: this.description.value
+    }
+
+    this.projectService.postNewProject(model).subscribe(
       data => {
         window.location.reload()
       }

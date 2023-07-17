@@ -10,10 +10,10 @@
             </p>
           </mat-panel-title>
           <mat-panel-description class="description">
-            <div class="expired" *ngIf="taskExpired(task.id)">
+            <div class="expired" *ngIf="taskExpired(task.id!)">
               Expired at: {{task.dueDate | date: 'dd/MM/yyyy'}}
             </div>
-            <div class="expires" *ngIf="!taskExpired(task.id)">
+            <div class="expires" *ngIf="!taskExpired(task.id!)">
               Expires at: {{task.dueDate | date: 'dd/MM/yyyy'}}
             </div>
           </mat-panel-description>
@@ -22,9 +22,9 @@
         <table>
             <tr>
                 <td class="task-description">{{task.description}}</td>
-                <td (click)="edit(task.id, task.dueDate)"><mat-icon>edit</mat-icon></td>
-                <td (click)="delete(task.id)"><mat-icon>delete</mat-icon></td>
-                <td class="finished-checkbox" (click)="finished(task.id)">
+                <td (click)="edit(task.id!, task.dueDate!)"><mat-icon>edit</mat-icon></td>
+                <td (click)="delete(task.id!)"><mat-icon>delete</mat-icon></td>
+                <td class="finished-checkbox" (click)="finished(task.id!)">
                     <mat-icon>
                         {{ task.finished ? 'check_box' : 'check_box_outline_blank' }}
                     </mat-icon>

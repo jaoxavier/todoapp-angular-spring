@@ -13,7 +13,7 @@ export class TaskService {
     private http: HttpClient
   ) { }
 
-  postNewTask(task: Task | TaskDTO){
+  postNewTask(task: TaskDTO){
     return this.http.post<any>(`${API}/tasks/new`, task);
   }
 

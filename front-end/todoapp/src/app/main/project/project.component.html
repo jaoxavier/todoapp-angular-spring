@@ -9,12 +9,12 @@
             </p>
         </mat-card-subtitle>
         <mat-card-actions class="card-buttons">
-            <mat-icon class="icon-project" (click)="newTask(project.id)">add_task</mat-icon>
-            <mat-icon class="icon-project" (click)="edit(project.id)">edit_note</mat-icon>
-            <mat-icon class="icon-project" (click)="delete(project.id)">delete</mat-icon>
+            <mat-icon class="icon-project" (click)="newTask(project.id!)">add_task</mat-icon>
+            <mat-icon class="icon-project" (click)="edit(project.id!)">edit_note</mat-icon>
+            <mat-icon class="icon-project" (click)="delete(project.id!)">delete</mat-icon>
         </mat-card-actions>
     </mat-card-header>
     <mat-card-content class="task-container">
-        <app-task [idProject]="project.id"></app-task>
+        <app-task [idProject]="project.id!"></app-task>
     </mat-card-content>
 </mat-card>
